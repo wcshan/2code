@@ -1,6 +1,6 @@
 'use strict';
 
-var base_url = '//jxjweb.gz01.bdysite.com/2code';
+var base_url = '//127.0.0.1';
 
 (function($) {
 
