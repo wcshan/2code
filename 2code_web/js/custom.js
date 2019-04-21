@@ -132,12 +132,11 @@ function visit() {
 
 function search_code() {
     var u = localStorage.u;
-    var a = $('#search_address').val().trim();
     var n = $('#search_name').val().trim();
-    var c = $('#search_url').val().trim();
+    var c = $('#search_mp').val().trim();
     $.ajax({
         url: base_url + '/2code_php/search.php',
-        data: 'u=' + u + '&c=' + c + '&a=' + a + '&n=' + n,
+        data: 'u=' + u + '&c=' + c + '&n=' + n,
         success: function success(msg) {
             var data = JSON.parse(msg);
             if (data.code == '1') {
@@ -156,8 +155,15 @@ function fix_code() {
     var i = localStorage.i;
     var a = $('#fix_address').val();
     var n = $('#fix_name').val();
-    var c = $('#fix_url').val();
-    var i2 = $('#fix_info').val();
+    var c = $('#fix_mp').val();
+  
+    var hp = $('#fix_hp').val();
+	var org = $('#fix_org').val();
+	var emails = $('#fix_emails').val();
+	var title = $('#fix_title').val();
+	var url = $('#fix_url').val();
+  
+  
     if (!n || !c) {
         $('#modal-form3').modal('show');
         $('#modal-form3 .info_text').text('请完整输入');
@@ -172,7 +178,12 @@ function fix_code() {
             c: c,
             a: a,
             n: n,
-            i: i
+            i: i,
+            hp: hp,
+            org: org,
+            emails: emails,
+            title: title,
+            url: url
         },
         success: function success(msg) {
             var data = JSON.parse(msg);
@@ -213,8 +224,13 @@ function delete_code() {
 
 function add_code() {
     var u = localStorage.u;
-    var c = $('#add_url').val().trim();
-    var i = $('#add_info').val().trim();
+		var c = $('#add_url').val().trim();
+		var title = $('#add_title').val().trim();
+		var org = $('#add_org').val().trim();	
+		var mp = $('#add_mp').val().trim();	
+		var hp = $('#add_hp').val().trim();	
+		var emails = $('#add_emails').val().trim();	
+	
     var n = $('#add_name').val().trim();
     var a = '';
     if ($('#province').val() != -1) {
@@ -226,7 +242,7 @@ function add_code() {
     if ($('#district').val() != -1) {
         a += $('#district option[value="' + $('#district').val() + '"]').text() + ' ';
     }
-    if (!c || !n) {
+    if (!mp || !n) {
         $('#modal-form3').modal('show');
         $('#modal-form3 .info_text').text('请完整输入!');
 
@@ -240,7 +256,11 @@ function add_code() {
             c: c,
             a: a,
             n: n,
-            i: i
+			title: title,
+			org: org,
+			mp: mp,
+			hp: hp,
+			emails: emails
         },
         success: function success(msg) {
             var data = JSON.parse(msg);
@@ -322,11 +342,44 @@ function add_content(msg) {
             } else {
                 code_id2 = '00' + code_id;
             }
-            html += '       <div class="col-md-6 col-sm-6 code_info">\n           <div class="media blog-thumb">\n              <div class="media-object media-left ele' + i + '">\n              </div>\n              <div class="media-body blog-info">\n                 <small><i class="fa fa-clock-o"></i>\u626B\u7801\u6B21\u6570:' + data.content[i].num + '</small>\n                 <h3><a href="javascript:void(0)">' + data.content[i].name + '</a></h3>\n                 <p>I D : ' + code_id2 + '</p>\n                 <p>\u7F51\u5740 : ' + data.content[i].content + '</p>\n                 <p>\u533A\u57DF : ' + (data.content[i].address || '无') + '</p>\n                 <p>\u5907\u6CE8 : ' + (data.content[i].info || '无') + '</p>\n                 <button class="btn section-btn" onclick=\'fix("' + encodeURI(data.content[i].id) + '","' + encodeURI(data.content[i].address) + '","' + encodeURI(data.content[i].name) + '","' + encodeURI(data.content[i].content) + '","' + encodeURI(data.content[i].info) + '")\'>\u4FEE\u6539</button>\n              </div>\n           </div>\n        </div>';
+			
+            html += '<div class="col-md-6 col-sm-6 code_info">'+
+			'<div class="media blog-thumb">'+
+			'<div class="media-object media-left ele' + i + '">'+
+			'</div>\n<div class="media-body blog-info">'+
+			'<small><i class="fa fa-clock-o"></i>\u626B\u7801\u6B21\u6570:' + data.content[i].num + '</small>'+
+			'<h3><a href="javascript:void(0)">' + data.content[i].name + '</a></h3>'+
+			'<p>I D : ' + code_id2 + '</p>'+
+			'<p>\u624b\u673a\u53f7\u7801 : ' + data.content[i].mp + '</p>'+
+			'<p\u516c\u53f8\u540d\u79f0 : ' + data.content[i].org + '</p>'+
+			'<p>\u7F51\u5740 : ' + data.content[i].content + '</p>'+
+			'<p\u804c\u79f0 : ' + data.content[i].title + '</p>'+
+			'<p>\u5bb6\u5ead\u53f7\u7801 : ' + data.content[i].hp + '</p>'+
+			'<p>\u7535\u5b50\u90ae\u7bb1 : ' + data.content[i].emails + '</p>'+
+			'<p>\u5730\u5740 : ' + (data.content[i].address || '无') + '</p>'+
+			'<button class="btn section-btn" onclick=\'fix("' + encodeURI(data.content[i].id) + '","' +
+			 encodeURI(data.content[i].address) + '","' +
+			 encodeURI(data.content[i].name) + '","' +
+			 encodeURI(data.content[i].content) + '","' +
+			 encodeURI(data.content[i].mp) + '","' +
+			 encodeURI(data.content[i].hp) + '","' +
+			 encodeURI(data.content[i].org) + '","' +
+			 encodeURI(data.content[i].title) + '","' +
+			 encodeURI(data.content[i].emails) + '")\'>\u4FEE\u6539</button>'+
+			'</div>'+
+			'</div>'+
+			'</div>';
             $('#code_b').append(html);
-            var ele = '.ele' + i;
-            var url = 'http:' + base_url + '/2code_web/jump.html?id=' + data.content[i].id + '&&qq=228322991&v=0.2.1';
-            paint(url, ele);
+			var ele = '.ele' + i;
+			var url = 'http:' + base_url + '/2code_web/jump.html?id=' + data.content[i].id + '&&qq=228322991&v=0.2.1';
+			var emails= data.content[i].emails
+			var qr ="";
+			qr = "BEGIN:VCARD", qr += "\r\nN:" + "" + ";" + data.content[i].name + ";;;",
+			qr += "\r\nFN: " + data.content[i].name + "  " + "", data.content[i].title && (qr += "\r\nTITLE:" + data.content[i].title),
+			data.content[i].address && (qr += "\r\nADR;WORK:;;" + data.content[i].address + ";;;;"), data.content[i].mp && (qr += "\r\nTEL;CELL,VOICE:" + data.content[i].mp),
+			data.content[i].hp && (qr += "\r\nTEL;WORK,VOICE:" + data.content[i].hp), data.content[i].content && (qr += "\r\nURL;WORK:" + data.content[i].content), data.content[i].emails && (qr += "\r\nEMAIL;INTERNET,HOME:" + data.content[i].emails),
+			qr += "\r\nEND:VCARD"		   
+			paint(qr, ele);
         }
     } else {
         localStorage.u = '';
@@ -342,17 +395,21 @@ function menu() {
     });
 }
 
-function fix(id, a, n, c, i) {
+function fix(id, a, n, c, mp, hp, org, title, emails) {
     localStorage.i = id;
     $('#fix_address').val(decodeURI(a));
     $('#fix_name').val(decodeURI(n));
     $('#fix_url').val(decodeURI(c));
-    $('#fix_info').val(decodeURI(i));
+    $('#fix_mp').val(decodeURI(mp));
+	$('#fix_hp').val(decodeURI(hp));
+    $('#fix_org').val(decodeURI(org));
+    $('#fix_emails').val(decodeURI(emails));
+    $('#fix_title').val(decodeURI(title));
     $('#modal-form2').modal('show');
 }
 
-function paint(url, ele) {
-    outputQRCod(url, 200, 200); //转换中文字符串
+function paint(qr, ele) {
+    outputQRCod(qr, 200, 200); //转换中文字符串
     function toUtf8(str) {
         var out, i, len, c;
         out = "";

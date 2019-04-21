@@ -3,7 +3,6 @@ header("Access-Control-Allow-Origin: *");
 $u = isset($_GET["u"]) ? $_GET["u"] : '';
 $n = isset($_GET["n"]) ? $_GET["n"] : '';
 $c = isset($_GET["c"]) ? $_GET["c"] : '';
-$a = isset($_GET["a"]) ? $_GET["a"] : '';
 // 连主库
 session_start();
 if ($_SESSION['code']!=$u) {
@@ -24,8 +23,7 @@ class Content {
 $content =new Content();
 $sql = "SELECT * 
 FROM  `2code_code` 
-WHERE address LIKE  '%".$a."%'
-AND name LIKE  '%".$n."%'
+WHERE name LIKE  '%".$n."%'
 AND content LIKE  '%".$c."%'
 AND user =  '".$u."'
 ORDER BY `id` DESC ";

@@ -34,6 +34,11 @@ CREATE TABLE IF NOT EXISTS `2code_code` (
   `address_id` varchar(16) NOT NULL,
   `name` varchar(16) NOT NULL DEFAULT ' 空',
   `info` varchar(16) NOT NULL,
+  `title` varchar(16) NOT NULL,
+  `org` varchar(16) NOT NULL,
+  `mp` varchar(16) NOT NULL,
+  `hp` varchar(16) NOT NULL,
+  `emails` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 

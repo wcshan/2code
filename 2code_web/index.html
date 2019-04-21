@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <title>二维码管理</title>
     <meta charset="UTF-8">
+	<link rel="shortcut icon" href="favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="description" content="QR code">
     <meta name="keywords" content="QR code">
@@ -44,9 +45,9 @@
                     <li><a href="#info" class="smoothScroll">声明</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right un_user">
-                    <li class="section-btn"><a href="#" data-toggle="modal" data-target="#modal-form">登录</a></li>
-                    <li class="section-btn section-btn2"><a href="#" data-toggle="modal" data-target="#modal-form-register">注册</a></li>
-                    <li class="section-btn section-btn3" id="visit"><a href="#">游客</a></li>
+                    <li class="section-btn"><a data-toggle="modal" data-target="#modal-form">登录</a></li>
+                    <li class="section-btn section-btn2"><a data-toggle="modal" data-target="#modal-form-register">注册</a></li>
+                    <li class="section-btn section-btn3" id="visit"><a>游客</a></li>
                 </ul>
             </div>
         </div>
@@ -83,14 +84,26 @@
                 <div class="col-md-12 col-sm-12">
                     <!-- CONTACT FORM HERE -->
                     <form id="contact-form" role="form">
+						<div class="col-md-6 col-sm-12">
+							<input type="text" class="form-control" placeholder="联系人名称(必填)" name="name" required="" id="add_name">
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<input type="text" class="form-control" placeholder="职称" name="title" required="" id="add_title">
+						</div>
+						<div class="col-md-6 col-sm-12">
+						    <input type="text" class="form-control" placeholder="移动电话(必填)" name="mp" required="" id="add_mp">
+						</div>
+						<div class="col-md-6 col-sm-12">
+						    <input type="text" class="form-control" placeholder="家庭电话" name="hp" required="" id="add_hp">
+						</div>
+						<div class="col-md-6 col-sm-12">
+						    <input type="text" class="form-control" placeholder="公司名称" name="org" required="" id="add_org">
+						</div>
+						<div class="col-md-6 col-sm-12">
+						    <input type="text" class="form-control" placeholder="电子邮箱 " name="emails" required="" id="add_emails">
+						</div>
                         <div class="col-md-6 col-sm-12">
-                            <input type="text" class="form-control" placeholder="二维码名称(必填)" name="name" required="" id="add_name">
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <input type="text" class="form-control" placeholder="网址(必填)" name="url" required="" id="add_url">
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <input type="text" class="form-control" placeholder="备注信息" name="info" required="" id="add_info">
+                            <input type="text" class="form-control" placeholder="网址" name="url" required="" id="add_url">
                         </div>
                         <div class="col-md-6 col-sm-12 address_code">
                             <select name="province" id="province">
@@ -128,16 +141,13 @@
                             <div class="col-md-12 search">
                                 <!-- CONTACT FORM HERE -->
                                 <form role="form">
-                                    <div class="col-md-3 col-sm-12">
+                                    <div class="col-md-4 col-sm-12">
                                         <input type="text" class="form-control" placeholder="搜索名称" name="name" required="" id="search_name">
                                     </div>
-                                    <div class="col-md-3 col-sm-12">
-                                        <input type="text" class="form-control" placeholder="搜索网址" name="url" required="" id="search_url">
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="text" class="form-control" placeholder="搜索手机号码" name="mp" required="" id="search_mp">
                                     </div>
-                                    <div class="col-md-3 col-sm-12">
-                                        <input type="text" class="form-control" placeholder="搜索地域" name="address" required="" id="search_address">
-                                    </div>
-                                    <div class="col-md-3 col-sm-12">
+                                    <div class="col-md-4 col-sm-12">
                                         <input type="button" class="form-control" name="submit" value="搜索二维码" id="search_code">
                                     </div>
                                 </form>
@@ -248,8 +258,12 @@
                                 <div role="tabpanel" class="tab-pane fade in" id="sign_in">
                                     <form>
                                         <input type="text" id="fix_name" autocomplete="off" class="form-control" name="name" placeholder="名称(必填)" required>
-                                        <input type="text" id="fix_url" autocomplete="off" class="form-control" name="url" placeholder="路径(必填)" required>
-                                        <input type="text" id="fix_info" autocomplete="off" class="form-control" name="url" placeholder="备注信息" required>
+                                        <input type="text" id="fix_mp" autocomplete="off" class="form-control" name="mp" placeholder="手机号码(必填)" required>
+										<input type="text" id="fix_hp" autocomplete="off" class="form-control" name="hp" placeholder="家庭电话" required>
+										<input type="text" id="fix_org" autocomplete="off" class="form-control" name="org" placeholder="公司名称" required>
+										<input type="text" id="fix_title" autocomplete="off" class="form-control" name="emails" placeholder="职称" required>
+										<input type="text" id="fix_emails" autocomplete="off" class="form-control" name="title" placeholder="电子邮箱" required>
+										<input type="text" id="fix_url" autocomplete="off" class="form-control" name="title" placeholder="网址" required>
                                         <input type="text" id="fix_address" autocomplete="off" class="form-control" name="address" placeholder="区域" required>
                                         <input type="button" id="fix_code" class="form-control" name="submit" value="确定">
                                         <input type="button" id="delete_code" class="form-control" name="submit" value="删除">
